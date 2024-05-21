@@ -1,14 +1,19 @@
-<p style="color: green"><%%= notice %></p>
+<%% if flash.notice.present? %>
+  <div class="container my-4">
+    <div class="alert alert-primary" role="alert">
+      <%%= flash.notice %>
+    </div>
+  </div>
+<%% end %>
 
-<h1><%= human_name.pluralize %></h1>
-
-<div id="<%= plural_table_name %>">
-  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-    <%%= render <%= singular_table_name %> %>
-    <p>
-      <%%= link_to "Show this <%= human_name.downcase %>", <%= model_resource_name(singular_table_name) %> %>
-    </p>
-  <%% end %>
+<div class="container">
+  <h1 class="d-hotwire-native-none my-4 pt-md-4"><%= human_name.pluralize %></h1>
 </div>
 
-<%%= link_to "New <%= human_name.downcase %>", <%= new_helper(type: :path) %> %>
+<%% if @<%= plural_table_name %>.any? %>
+  <div class="container list-group list-group-flush px-0">
+    <%%= render @<%= plural_table_name %> %>
+  </div>
+<%% else %>
+  <p class="container">No <%= human_name.downcase.pluralize %>, yet.</p>
+<%% end %>
