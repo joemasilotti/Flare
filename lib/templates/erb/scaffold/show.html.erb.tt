@@ -1,10 +1,21 @@
-<p style="color: green"><%%= notice %></p>
+<%% if flash.notice.present? %>
+  <div class="container my-4">
+    <div class="alert alert-primary" role="alert">
+      <%%= flash.notice %>
+    </div>
+  </div>
+<%% end %>
 
-<%%= render @<%= singular_table_name %> %>
+<div class="container">
+<%- if attributes.first.present? -%>
+  <h1 class="d-hotwire-native-none my-4 pt-md-4"><%%= @<%= singular_name %>.<%= attributes.first.column_name %> %></h1>
+<%- end -%>
 
-<div>
-  <%%= link_to "Edit this <%= human_name.downcase %>", <%= edit_helper(type: :path) %> %> |
-  <%%= link_to "Back to <%= human_name.pluralize.downcase %>", <%= index_helper(type: :path) %> %>
-
-  <%%= button_to "Destroy this <%= human_name.downcase %>", <%= model_resource_name(prefix: "@") %>, method: :delete %>
+  <%- attributes.reject(&:password_digest?).each_with_index do |attribute, index| -%>
+    <%- next if index == 0 -%>
+  <p>
+    <span class="fw-medium"><%= attribute.human_name %>:</span>
+    <%%= @<%= singular_name %>.<%= attribute.column_name %> %>
+  </p>
+  <%- end -%>
 </div>
