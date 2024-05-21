@@ -12,6 +12,8 @@ For example, to generate a post resource:
 $ rails generate scaffold Post name:string title:string content:text
 ```
 
+## Install Bootstrap CSS
+
 You can install [Bootstrap](https://getbootstrap.com) via their CDN by adding the following to your application layout:
 
 ```erb
@@ -28,4 +30,51 @@ You can install [Bootstrap](https://getbootstrap.com) via their CDN by adding th
 
   <%# ... %>
 </html>
+```
+
+## Toggle Turbo Native app content
+
+Optionally, add `native.css` to conditionally show/hide content in Turbo Native apps:
+
+```css
+/* app/assets/stylesheets/native.css */
+
+.d-hotwire-native-none {
+  display: none !important;
+}
+
+.d-hotwire-native-block {
+  display: block !important;
+}
+```
+
+Add the following to your application layout to only include this CSS in the apps:
+
+```erb
+<%# app/views/layouts/application.html %>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <%# ... %>
+
+    <% if turbo_native_app? %>
+      <%= stylesheet_link_tag "native", "data-turbo-track": "reload" %>
+    <% end %>
+  </head>
+
+  <%# ... %>
+</html>
+```
+
+You might need to ignore (stub) this file from being automatically included if you are already requiring the entire directory in `application.scss`:
+
+```css
+/* app/assets/stylesheets/application.css */
+
+/*
+ *= stub native
+ *= require_tree .
+ *= require_self
+ */
 ```
