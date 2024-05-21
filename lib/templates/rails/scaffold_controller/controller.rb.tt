@@ -36,7 +36,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def destroy
     <%= orm_class.find(class_name, "params[:id]") %>.destroy
-    redirect_to <%= index_helper %>_url, notice: <%= %("#{human_name} was removed.") %>, status: :see_other
+    redirect_to <%= index_helper(type: :path) %>, notice: <%= %("#{human_name} was removed.") %>, status: :see_other
   end
 
   private
