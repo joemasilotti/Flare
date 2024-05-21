@@ -19,7 +19,5 @@
   </div>
 
   <%- end -%>
-  <div class="d-grid d-sm-flex justify-content-sm-end mt-4">
-    <%%= form.submit "Save", class: "btn btn-primary" %>
-  </div>
+  <%%= yield form if block_given? %>
 <%% end %>

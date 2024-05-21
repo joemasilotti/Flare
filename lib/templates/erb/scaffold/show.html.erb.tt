@@ -1,21 +1,23 @@
 <%% if flash.notice.present? %>
-  <div class="container my-4">
+  <div class="container mt-4">
     <div class="alert alert-primary" role="alert">
       <%%= flash.notice %>
     </div>
   </div>
 <%% end %>
 
-<div class="container">
+<div class="container mt-4">
 <%- if attributes.first.present? -%>
-  <h1 class="d-hotwire-native-none my-4 pt-md-4"><%%= @<%= singular_name %>.<%= attributes.first.column_name %> %></h1>
+  <h1 class="d-hotwire-native-none mb-4"><%%= @<%= singular_name %>.<%= attributes.first.column_name %> %></h1>
 <%- end -%>
-
   <%- attributes.reject(&:password_digest?).each_with_index do |attribute, index| -%>
     <%- next if index == 0 -%>
+
   <p>
     <span class="fw-medium"><%= attribute.human_name %>:</span>
     <%%= @<%= singular_name %>.<%= attribute.column_name %> %>
   </p>
   <%- end -%>
+
+  <%%= link_to "Edit", <%= edit_helper(type: :path) %>, class: "btn btn-outline-primary mt-1" %>
 </div>
