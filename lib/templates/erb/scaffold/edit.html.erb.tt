@@ -4,7 +4,7 @@
   <%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> do |form| %>
     <div class="d-flex gap-2 justify-content-sm-between mt-4">
       <%%= link_to "Delete", @<%= singular_table_name %>,
-        "data-turbo-confirm": "Are you sure?",
+        "data-turbo-confirm": "Remove this <%= human_name.downcase %>?",
         "data-turbo-method": "delete",
         class: "btn btn-outline-danger flex-shrink-0" %>
       <%%= form.submit "Save", class: "btn btn-primary flex-grow-1 flex-sm-grow-0" %>
