@@ -1,10 +1,7 @@
-<h1>Editing <%= human_name.downcase %></h1>
+<div class="container">
+  <h1 class="d-hotwire-native-none my-4 pt-md-4">Edit <%= human_name.downcase %></h1>
+</div>
 
-<%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> %>
-
-<br>
-
-<div>
-  <%%= link_to "Show this <%= human_name.downcase %>", <%= model_resource_name(prefix: "@") %> %> |
-  <%%= link_to "Back to <%= human_name.pluralize.downcase %>", <%= index_helper(type: :path) %> %>
+<div class="container">
+  <%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> %>
 </div>

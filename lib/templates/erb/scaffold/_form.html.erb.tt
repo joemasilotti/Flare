@@ -1,37 +1,25 @@
-<%%= form_with(model: <%= model_resource_name %>) do |form| %>
-  <%% if <%= singular_table_name %>.errors.any? %>
-    <div style="color: red">
-      <h2><%%= pluralize(<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+<%% if <%= singular_table_name %>.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <p class="alert-heading fw-semibold mb-1">
+      Please fix these issues to add your <%= human_name.downcase %>:
+    </p>
+    <ul class="mb-0">
+      <%% <%= singular_table_name %>.errors.each do |error| %>
+        <li><%%= error.full_message %></li>
+      <%% end %>
+    </ul>
+  </div>
+<%% end %>
 
-      <ul>
-        <%% <%= singular_table_name %>.errors.each do |error| %>
-          <li><%%= error.full_message %></li>
-        <%% end %>
-      </ul>
-    </div>
-  <%% end %>
-
-<% attributes.each do |attribute| -%>
+<%%= form_with model: <%= model_resource_name %>, class: "row g-3 mt-1" do |form| %>
+  <%- attributes.each do |attribute| -%>
   <div>
-<% if attribute.password_digest? -%>
-    <%%= form.label :password, style: "display: block" %>
-    <%%= form.password_field :password %>
+    <%%= form.label :<%= attribute.column_name %>, class: "form-label" %>
+    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control" %>
   </div>
 
-  <div>
-    <%%= form.label :password_confirmation, style: "display: block" %>
-    <%%= form.password_field :password_confirmation %>
-<% elsif attribute.attachments? -%>
-    <%%= form.label :<%= attribute.column_name %>, style: "display: block" %>
-    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true %>
-<% else -%>
-    <%%= form.label :<%= attribute.column_name %>, style: "display: block" %>
-    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %> %>
-<% end -%>
-  </div>
-
-<% end -%>
-  <div>
-    <%%= form.submit %>
+  <%- end -%>
+  <div class="d-grid d-sm-flex justify-content-sm-end mt-4">
+    <%%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <%% end %>
