@@ -1,5 +1,5 @@
-<div class="container mt-4">
-  <h1 class="d-hotwire-native-none mb-4">Edit <%= human_name.downcase %></h1>
+<div class="container">
+  <h1 class="d-hotwire-native-none my-4">Edit <%= human_name.downcase %></h1>
 
   <%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> do |form| %>
     <div class="d-flex gap-2 justify-content-sm-between mt-4">

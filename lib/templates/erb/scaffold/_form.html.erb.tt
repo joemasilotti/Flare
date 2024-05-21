@@ -11,7 +11,7 @@
   </div>
 <%% end %>
 
-<%%= form_with model: <%= model_resource_name %>, class: "row g-3 mt-1" do |form| %>
+<%%= form_with model: <%= model_resource_name %>, class: "row g-3" do |form| %>
   <%- attributes.each do |attribute| -%>
   <div>
     <%%= form.label :<%= attribute.column_name %>, class: "form-label" %>
