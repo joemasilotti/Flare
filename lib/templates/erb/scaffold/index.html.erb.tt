@@ -17,3 +17,7 @@
 <%% else %>
   <p class="container">No <%= human_name.downcase.pluralize %>, yet.</p>
 <%% end %>
+
+<div class="container d-flex justify-content-between gap-2 mt-4">
+  <%%= link_to "Add a <%= human_name %>", <%= new_helper(type: :path) %>, class: "btn btn-primary flex-grow-1 flex-sm-grow-0" %>
+</div>
